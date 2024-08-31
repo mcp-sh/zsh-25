@@ -1,16 +1,29 @@
 ---
-
+import BaseLayout from "../components/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg text-center">
+    <img
+      src="https://assets.zerma.com/25logo.png"
+      alt="25 Years ZERMA Shanghai"
+      class="w-32 mx-auto mb-6"
+    />
+    <h1 class="text-2xl font-bold text-zermaBlue mb-4">
+      Celebrating 25 Years of ZERMA Shanghai
+    </h1>
+
+    <!-- Date and Location Information -->
+    <div class="text-center mb-10 border-y py-6 border-gray-600">
+      <p class="text-lg text-gray-800 font-semibold">
+        October 19th & 20th, 2024
+      </p>
+      <p class="text-lg text-gray-800 font-semibold">Shanghai, China</p>
+    </div>
+    <a
+      href="/rsvp"
+      class="inline-block bg-blue-500 text-white px-6 py-2 rounded-md text-lg font-medium hover:bg-blue-600 transition"
+      >RSVP Now</a
+    >
+  </div>
+</BaseLayout>
