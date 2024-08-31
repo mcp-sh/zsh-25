@@ -97,12 +97,13 @@ console.log(subEmail);
   <script>
     const rsvpForm = document.getElementById("rsvpForm");
     rsvpForm.addEventListener("submit", async function (event) {
-      console.log("submit clicked");
+      // console.log("submit clicked");
       event.preventDefault(); // Prevent the form from submitting in the traditional way
-      console.log(event);
+      // console.log(event);
 
       const formData = new FormData(event.currentTarget as HTMLFormElement);
       const formObject = Object.fromEntries(formData.entries());
+      const messageElement = document.getElementById("message");
 
       try {
         const response = await fetch(`/api/registerAttendee`, {
@@ -113,18 +114,16 @@ console.log(subEmail);
           body: JSON.stringify(formObject),
         });
 
-        const messageElement = document.getElementById("message");
-
         if (response.ok) {
           messageElement.innerHTML =
-            '<p class="text-green-500">RSVP submitted successfully!</p>';
+            '<p class="text-green-500">Information submitted successfully!</p>';
         } else {
           messageElement.innerHTML =
-            '<p class="text-red-500">Failed to submit RSVP. Please try again.</p>';
+            '<p class="text-red-500">Something went wrong. Please check and try again.</p>';
         }
       } catch (error) {
         console.error("Error submitting form:", error);
-        document.getElementById("message").innerHTML =
+        messageElement.innerHTML =
           '<p class="text-red-500">An error occurred. Please try again.</p>';
       }
     });
