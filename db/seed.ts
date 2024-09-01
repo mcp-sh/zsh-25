@@ -8,12 +8,16 @@ export default async function () {
       company: "ZERMA Shanghai",
       email: "maxx@zerma.com",
       pax: 1,
+      arrDate: "2024-10-18",
+      depDate: "2024-10-21",
     },
     {
       name: "Sally Lu",
       company: "ZERMA Shanghai",
       email: "sally@zerma.com",
       pax: 1,
+      arrDate: "2024-10-18",
+      depDate: "2024-10-21",
     },
   ]);
 }

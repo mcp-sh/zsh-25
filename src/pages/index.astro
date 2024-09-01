@@ -3,7 +3,9 @@ import BaseLayout from "../components/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg text-center">
+  <div
+    class="bg-white rounded-lg shadow-lg p-8 max-w-lg text-center min-h-screen"
+  >
     <a href="/">
       <img
         src="https://assets.zerma.com/25logo.png"
@@ -22,10 +24,11 @@ import BaseLayout from "../components/BaseLayout.astro";
       </p>
       <p class="text-lg text-gray-800 font-semibold">Shanghai, China</p>
     </div>
-    <a
+    <div class="text-gray-500 text-sm mb-6">More info coming soon</div>
+    <!-- <a
       href="/rsvp"
       class="inline-block bg-blue-500 text-white px-6 py-2 rounded-md text-lg font-medium hover:bg-blue-600 transition"
       >Confirm Now</a
-    >
+    > -->
   </div>
 </BaseLayout>

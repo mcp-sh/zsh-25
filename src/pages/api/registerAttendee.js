@@ -2,14 +2,8 @@ import { db, Rsvps } from "astro:db";
 
 export async function POST({ request }) {
   try {
-    const {
-      name,
-      company,
-      email,
-      pax,
-      arrivalDate: arrDate,
-      departureDate: depDate,
-    } = await request.json();
+    const { name, company, email, pax, arrDate, depDate } =
+      await request.json();
 
     const result = await db
       .insert(Rsvps)
