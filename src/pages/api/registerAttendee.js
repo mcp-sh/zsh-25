@@ -2,14 +2,15 @@ import { db, Rsvps } from "astro:db";
 
 export async function POST({ request }) {
   try {
-    const data = await request.json();
-    console.log(data);
-    const name = data.name;
-    const company = data.company;
-    const email = data.email;
-    const pax = data.pax;
-    const arrDate = data.arrDate;
-    const depDate = data.depDate;
+    const {
+      name,
+      company,
+      email,
+      pax,
+      arrivalDate: arrDate,
+      departureDate: depDate,
+    } = await request.json();
+
     const result = await db
       .insert(Rsvps)
       .values({
@@ -21,22 +22,19 @@ export async function POST({ request }) {
         depDate,
       })
       .returning();
-    console.log(result);
+
     return new Response(
       JSON.stringify({
-        message: `Succesfully added attendee - ${name} with id ${result}`,
+        message: `Succesfully added attendee - ${name} with id ${result.id}`,
       }),
       { status: 200 },
-      { Headers: { "Content-Type": "application/json" } },
+      { headers: { "Content-Type": "application/json" } },
     );
   } catch (error) {
-    console.error(error);
     return new Response(
-      JSON.stringify({
-        message: `Failed to add attendee - ${error}`,
-      }),
+      JSON.stringify({ message: `Failed to add attendee - ${error.message}` }),
       { status: 500 },
-      { Headers: { "Content-Type": "application/json" } },
+      { headers: { "Content-Type": "application/json" } },
     );
   }
 }
