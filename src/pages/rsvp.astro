@@ -2,6 +2,7 @@
 import BaseLayout from "../components/BaseLayout.astro";
 
 const subEmail = Astro.url.searchParams.get("email") || "";
+const subName = Astro.url.searchParams.get("name") || "";
 console.log(subEmail);
 ---
 
@@ -26,6 +27,7 @@ console.log(subEmail);
         <input
           type="text"
           name="name"
+          value={subName}
           required
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
