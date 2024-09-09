@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+
+const subEmail = Astro.url.searchParams.get("email") || "";
+console.log(subEmail);
+---
+
+<BaseLayout>
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full">
+    <a href="/">
+      <img
+        src="https://assets.zerma.com/25logo.png"
+        alt="25 Years ZERMA Shanghai"
+        class="w-32 mx-auto mb-6"
+      />
+    </a>
+    <h1 class="text-2xl font-bold text-zermaBlue mb-6 text-center">
+      ZERMA 25th Anniversary
+    </h1>
+    <!-- Message display area -->
+    <div id="message" class="text-center mb-4"></div>
+    <!-- RSVP Form -->
+    <form class="space-y-4" id="rsvpForm">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Name:</label>
+        <input
+          type="text"
+          name="name"
+          required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={subEmail}
+          required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700"
+          >Number of Attendees:</label
+        >
+        <input
+          type="number"
+          name="pax"
+          min="1"
+          value="1"
+          required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-500 text-white py-2 px-4 rounded-md font-medium hover:bg-blue-600 transition"
+        >Confirm</button
+      >
+    </form>
+  </div>
+  <script>
+    const rsvpForm = document.getElementById("rsvpForm");
+    rsvpForm.addEventListener("submit", async function (event) {
+      // console.log("submit clicked");
+      event.preventDefault(); // Prevent the form from submitting in the traditional way
+      // console.log(event);
+
+      const formData = new FormData(event.currentTarget as HTMLFormElement);
+      const formObject = Object.fromEntries(formData.entries());
+      const messageElement = document.getElementById("message");
+
+      try {
+        const response = await fetch(`/api/registerLunchAttendee`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          messageElement.innerHTML =
+            '<p class="text-green-500">Information submitted successfully!</p>';
+        } else {
+          messageElement.innerHTML =
+            '<p class="text-red-500">Something went wrong. Please check and try again.</p>';
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        messageElement.innerHTML =
+          '<p class="text-red-500">An error occurred. Please try again.</p>';
+      }
+    });
+  </script>
+</BaseLayout>

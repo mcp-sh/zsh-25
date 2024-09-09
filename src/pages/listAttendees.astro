@@ -2,7 +2,6 @@
 import BaseLayout from "../components/BaseLayout.astro";
 import Attendee from "../components/Attendee.astro";
 const data = await fetch(`${Astro.url.origin}/api/getAttendees.json`);
-// console.log(data);
 const attendees = await data.json();
 ---
 

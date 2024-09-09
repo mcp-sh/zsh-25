@@ -15,7 +15,18 @@ const Rsvps = defineTable({
   },
 });
 
+const Lunch = defineTable({
+  columns: {
+    id: column.number({ primaryKey: true }),
+    name: column.text(),
+    company: column.text({ optional: true }),
+    email: column.text({ unique: true }),
+    pax: column.number(),
+    notes: column.text({ optional: true }),
+  },
+});
+
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Rsvps },
+  tables: { Rsvps, Lunch },
 });
